@@ -30,6 +30,11 @@ for(let i=0; i<totalNavList; i++){
         }
         this.classList.add("active")
         showSection(this);
+
+        if(window.innerWidth < 1200){
+            asideSectionTogglerBtn();
+
+        }
     })
     
 }
@@ -41,3 +46,30 @@ function showSection(element){
      const target = element.getAttribute("href").split("#")[1];
      document.querySelector("#" + target).classList.add("active")
 }
+function updateNav(element){
+    for(i=0; i<totalNavList; i++){
+        navList[i].querySelector("a").classList.remove("active");
+        const target = element.getAttribute("href").split("#")[1];
+        if(target === navList[i].querySelector("a").getAttribute("href").split("#")[1]){
+            navList[i].querySelector("a").classList.add("active")
+        }
+    }
+}
+document.querySelector(".hire-me").addEventListener("click", function(){
+  const sectionIndex = this.getAttribute("data-section-index");
+  console.log(sectionIndex);
+    showSection(this)
+   updateNav(this)
+})
+const navTogglerBtn = document.querySelector(".nav-toggler")
+    aside= document.querySelector(".aside");
+    navTogglerBtn.addEventListener("click", () =>{
+        asideSectionTogglerBtn();
+    })
+    function asideSectionTogglerBtn(){
+        aside.classList.toggle("open");
+        navTogglerBtn.classList.toggle("open");
+        for(let i=0; i<totalSection; i++){
+            allSection[i].classList.toggle("open")
+        }
+    }
